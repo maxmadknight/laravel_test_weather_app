@@ -69,4 +69,15 @@ class UserFactory extends Factory
             'ownedTeams'
         );
     }
+
+    public function withWeatherPreferences()
+    {
+        return $this->afterCreating(function (User $user) {
+            $user->weatherPreferences()->create([
+                'city' => 'London',
+                'precipitation_threshold' => 1,
+                'uv_index_threshold' => 1,
+            ]);
+        });
+    }
 }
